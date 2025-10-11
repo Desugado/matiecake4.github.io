@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop | Matie Cake</title>
+    <link rel="icon" type="image/png" href="Image/Logo.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: #faf7f2; color: #222; }
+        header { background: #3f53ae; color: #fff; padding: 0 40px; display: flex; align-items: center; height: 80px; }
+        .logo { height: 60px; margin-right: 40px; }
+        nav { flex: 1; }
+        nav ul { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; position: relative; }
+        nav li { font-weight: 700; position: relative; }
+        nav a { color: #fff; text-decoration: none; transition: color 0.2s; }
+        nav a:hover { color: #ffe066; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2a2f95;
+            min-width: 220px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            border-radius: 0 0 8px 8px;
+            z-index: 10;
+        }
+        .dropdown-content li { padding: 0; }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 24px;
+            color: #fff;
+            font-weight: 400;
+            text-decoration: none;
+            border-bottom: 1px solid #4e6b2b;
+        }
+        .dropdown-content a:hover {
+            background: #2e3d1b;
+            color: #ffe066;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .banner {
+            background: #fbeee0;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .banner-title { font-size: 3.5rem; font-family: 'Roboto', cursive; color: #a85b2b; margin-bottom: 0.5em; }
+        .banner-sub { font-size: 1.5rem; color: #40602b; margin-bottom: 1em; }
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+            display: block;
+        }
+        
+        .workshop-intro {
+            padding: 60px 20px;
+            background: #faf7f2;
+            text-align: center;
+        }
+        .workshop-intro h2 { font-size: 2.4rem; color: #40602b; margin-bottom: 24px; }
+        .workshop-intro p { font-size: 1.4rem; line-height: 1.8; color: #555; max-width: 900px; margin: 0 auto 40px; }
+        
+        .workshop-why {
+            padding: 60px 20px;
+            background: #fff;
+        }
+        .workshop-why h2 { font-size: 3rem; color: #40602b; margin-bottom: 24px; text-align: center; }
+        .workshop-why p { font-size: 1.4rem; line-height: 1; color: #555; max-width: 900px; margin: 0 auto 40px; text-align: left; }
+        
+        .workshop-types {
+            padding: 60px 20px;
+            background: #faf7f2;
+        }
+        .workshop-types h2 { font-size: 2.4rem; color: #40602b; margin-bottom: 24px; text-align: center; }
+        .workshop-types p { font-size: 1.4rem; line-height: 1; color: #555; max-width: 900px; margin: 0 auto 40px; text-align: left; }
+
+        .workshop-register {
+            padding: 60px 20px;
+            background: #fff;
+        }
+        .workshop-register h2 { font-size: 2.4rem; color: #40602b; margin-bottom: 24px; text-align: center; }
+        .workshop-register p { font-size: 1.4rem; line-height: 1; color: #555; max-width: 900px; margin: 0 auto 40px; text-align: left; }
+
+
+        .section-title { font-size: 2.5rem; color: #40602b; text-align: center; margin-bottom: 50px; font-weight: 700; }
+        
+        .register-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1a1157 0%, #1a1157 100%);
+            color: #fff;
+        }
+        
+        .register-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .register-title {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .register-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ffe066;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: 3px solid #ffe066;
+        }
+        
+        .submit-btn {
+            background: #a85b2b;
+            color: #fff;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background: #8a4a20;
+        }
+        
+        .courses-section {
+            padding: 60px 20px;
+            background: #fff;
+        }
+        
+        .course-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+        }
+        
+        .course-item {
+            background: #faf7f2;
+            border-radius: 16px;
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 32px;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .course-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .course-details h3 {
+            font-size: 1.8rem;
+            color: #40602b;
+            margin-bottom: 16px;
+        }
+        
+        .course-details p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .course-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .course-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .course-price-tag {
+            font-size: 1.8rem;
+            color: #a85b2b;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+        
+        footer { background: #1a1157; color: #fff; padding: 40px 20px 20px; }
+        .footer-content { max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; gap: 32px; }
+        .footer-info { flex: 2; }
+        .footer-logo { height: 48px; margin-bottom: 16px; }
+        .footer-links { flex: 1; }
+        .footer-links ul { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 8px; }
+        .footer-links a { color: #ffe066; text-decoration: none; }
+        .footer-bottom { text-align: center; margin-top: 32px; font-size: 0.95rem; color: #bbb; }
+        
+        @media (max-width: 768px) {
+            .banner-title { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .course-item {
+                grid-template-columns: 1fr;
+            }
+            nav ul { flex-direction: column; gap: 16px; }
+            header { flex-direction: column; height: auto; padding: 20px; }
+        }
+        
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Image/Logo.png" alt="Matie Cake" class="logo">
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Cake Menu</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#new-products">New Products</a></li>
+                        <li><a href="#favorite-products">Favorite Products</a></li>
+                        <li><a href="#christmas-gifts">Christmas Gifts</a></li>
+                        <li><a href="#tet-gifts">Tet Gifts</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="khach-hang-than-thiet.html">Loyal Customers</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#loyal-customers">Loyal Customers</a></li>
+                        <li><a href="#member-policy">Member/VIP Policy</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Delivery</a></li>
+                <li><a href="#">General Policy</a></li>
+                <li><a href="work-shop.html">Workshop</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="banner">
+        <a href="work-shop.html"><img src="Image 3/workshop.jpg" alt="Workshop" class="banner-img"></a>
+    </section>
+
+    <section class="workshop-intro">
+        <div class="container">
+            <h1 class="banner-title">WORKSHOP "CRAFTED BY HAND, WRAPPED WITH LOVE"</h1>
+        <img src="Image 3/Workshop Intro.jpg" alt="Intro Workshop" style="width:100%; max-width:750px; margin:20px 0; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+            <p class="banner-subtitle">At Matie Cake, each cake is not only a delicious dish but also a bonding experience. When you buy any cake box or special gift set, you will immediately receive a voucher to join a free cake making workshop, the opportunity to make handmade cakes yourself and enjoy the joy of creativity.</p>
+        <img src="Image 3/Workshop all.jpg" alt="Workshop All" style="width:100%; max-width:800px; margin:20px 0; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+        
+        </div>
+    </section>
+
+    <section class="workshop-why">
+        <div class="container">
+            <h2>Workshop Schedule</h2>
+            <p>Workshop takes place on every Saturdays and Sundays.</p>
+            <p>Brand new topic every month: Moon Cake handmade, Salted egg sponge cake, flan, flan cheese, cookies, croissant and etc.</p>
+            <p>Duration: 2 - 2,5 hours per session.</p>
+            <p>Quantity: 10 – 15 people per session to ensure the best experience.</p>
+        </div>
+    </section>
+
+    <section class="workshop-types">
+        <div class="container">
+            <h2>What will participants gain after joining the workshop?</h2>
+            <p>Learn baking directly with Matie Cake’s chef.</p>
+            <p>Discover ingredients and secrets to making delicious, safe cakes.</p>
+            <p>Create, decorate, and bring your handmade products home.</p>
+            <p>Receive an additional café voucher to enjoy drinks after the workshop.</p>
+        </div>
+    </section>
+
+    <section class="workshop-register">
+        <div class="container">
+            <h2>How to Register</h2>
+            <p>Online: Register now via Matie Cake’s website or fanpage.</p>
+            <p>-Store: Present your voucher and choose a suitable participation schedule.</p>
+            <p>Hotline/Zalo: 0886804360.</p>
+        </div>
+    </section>
+
+
+    <section class="register-section" id="register">
+        <div class="register-container">
+            <h2 class="register-title">Đăng ký ngay!</h2>
+            <p class="register-subtitle">Đăng ký ngay trong tháng này để nhận ưu đãi giảm đến 500k tiền học phí!</p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="name">Họ và tên *</label>
+                    <input type="text" id="name" name="name" required placeholder="Nhập họ tên của bạn">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Số điện thoại *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Nhập email của bạn">
+                </div>
+                
+                <div class="form-group">
+                    <label for="course">Chọn khóa học *</label>
+                    <select id="course" name="course" required>
+                        <option value="">-- Chọn khóa học --</option>
+                        <option value="banh-mi">Khóa Bánh mỳ cơ bản không phụ gia</option>
+                        <option value="banh-lanh">Khóa Bánh lạnh kinh doanh</option>
+                        <option value="banh-kem">Khóa Bánh kem kinh doanh cơ bản</option>
+                        <option value="banh-kem-hoa">Khóa Bánh kem hoa topping</option>
+                        <option value="teabreak">Khóa Các loại bánh Teabreak</option>
+                        <option value="tron-goi">Khóa Bánh kem trọn gói ra nghề</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">Đăng ký ngay!</button>
+                
+                <div class="success-message" id="successMessage">
+                    ✓ Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <img src="Image/Logo.png" alt="Matie Cake" class="footer-logo">
+                <div>Matie Cake Co., Ltd.</div>
+                <div>Address: 3636 Hai Ba Trung, Vo Thi Sau Ward, 3 district, Ho Chi Minh City</div>
+                <div>Phone: 0886804360</div>
+                <div>Email: matiecake@gmail.com</div>
+            </div>
+
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return & Refund Policy</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Personal Data Protection</a></li>
+                    <li><a href="#">Contact Information</a></li>
+                    <li><a href="#">Store</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Matie Cake.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const course = document.getElementById('course').value;
+            
+            // Hiển thị thông báo thành công
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Ẩn thông báo sau 5 giây
+            setTimeout(function() {
+                successMsg.style.display = 'none';
+            }, 5000);
+            
+            // Trong thực tế, bạn sẽ gửi dữ liệu này đến server
+            console.log('Đăng ký:', { name, phone, email, course });
+        });
+
+        // Smooth scroll cho các link nội bộ
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
