@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nội Dung Giữa Hai Ảnh | Matie Cake</title>
+    <link rel="icon" type="image/png" href="Image/Logo.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/media query.css">
+    
+    <style>
+        /* CSS Chung từ index.html */
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: #faf7f2; color: #222; }
+
+        /* CSS Header từ index.html */
+        header { background: #3f53ae; color: #fff; padding: 0 40px; display: flex; align-items: center; height: 80px; }
+        .logo { height: 60px; margin-right: 40px; }
+        nav { flex: 1; }
+        nav ul { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; position: relative; }
+        nav li { font-weight: 700; position: relative; }
+        nav a { color: #fff; text-decoration: none; transition: color 0.2s; }
+        nav a:hover { color: #ffe066; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2a2f95;
+            min-width: 220px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            border-radius: 0 0 8px 8px;
+            z-index: 10;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2a2f95;
+            min-width: 220px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            border-radius: 0 0 8px 8px;
+            z-index: 10;
+        }
+        .dropdown-content li { padding: 0; }
+        .dropdown-content a {
+            display: block;
+            padding: 12px 24px;
+            color: #fff;
+            font-weight: 400;
+            text-decoration: none;
+            border-bottom: 1px solid #4e6b2b;
+        }
+        .dropdown-content a:hover {
+            background: #2e3d1b;
+            color: #ffe066;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+
+
+        /* CSS Footer (Cần có để footer hiển thị đúng) */
+        footer { background: #1a1157; color: #fff; padding: 40px 0 20px 0; }
+        .footer-content { max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; gap: 32px; }
+        .footer-info { flex: 2; }
+        .footer-logo { height: 48px; margin-bottom: 16px; }
+        .footer-links { flex: 1; }
+        .footer-links ul { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 8px; }
+        .footer-links a { color: #ffe066; text-decoration: none; }
+        .footer-bottom { text-align: center; margin-top: 32px; font-size: 0.95rem; color: #bbb; }
+        @media (max-width: 900px) {
+            .products { flex-direction: column; align-items: center; }
+            .footer-content { flex-direction: column; align-items: center; }
+        }
+
+        /* ************************************** */
+        /* CSS TẠO SECTION MỚI (Nội dung ở giữa 2 ảnh) */
+        /* ************************************** */
+
+        /* Bật Flexbox trên Body để quản lý 3 cột (2 ảnh cố định + 1 nội dung cuộn) */
+        body.custom-layout {
+            display: flex;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        /* Ẩn Header/Footer khi dùng layout 3 cột, hoặc đặt chúng ra khỏi Flexbox */
+        /* Ở đây ta sẽ sử dụng cấu trúc truyền thống nhưng buộc nội dung chính co giãn */
+
+        /* Container mới cho nội dung chính */
+        .middle-section {
+            display: flex; /* Bật Flexbox để chia thành 3 cột */
+            width: 100%;
+            min-height: calc(100vh - 80px - 280px); /* Giả định chiều cao Header 80px và Footer 280px */
+            position: relative; /* Quan trọng cho việc cố định ảnh */
+            padding-top: 0px; /* Thêm padding trên dưới cho nội dung */
+            padding-bottom: 0px;
+        }
+
+        /* CSS cho 2 ảnh cố định hai bên */
+        .side-image {
+            width: 20%; /* Ảnh chiếm 20% chiều rộng mỗi bên (tùy chỉnh) */
+            background-image: url('Picture1.jpg-87535afd-dc47-43d3-8a56-e71ddb6d0cdc'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: sticky; /* Giúp ảnh cố định trong khu vực cuộn */
+            top: 80px; /* Cố định ngay dưới Header */
+            height: 100vh; /* Ảnh cố định cao bằng khung nhìn */
+            max-height: 800px; /* Giới hạn chiều cao tối đa của ảnh */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Ẩn một ảnh nếu chỉ muốn dùng ảnh nền (Optional) */
+        .side-image.right {
+            /* Dùng ảnh khác nếu có */
+            background-image: url('Picture1.jpg-87535afd-dc47-43d3-8a56-e71ddb6d0cdc');
+        }
+
+        /* CSS cho nội dung chính giữa */
+        .center-content {
+            padding: 60px 20px;
+            background: #fff;
+        }
+        .center-content h2 { font-size: 3rem; color: #40602b; margin-bottom: 24px; text-align: center; }
+        .center-content p { font-size: 1.4rem; line-height: 1; color: #555; max-width: 900px; margin: 0 auto 40px; text-align: left; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Image/Logo.png" alt="Matie Cake" class="logo">
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#">Cake Menu</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#new-products">New Products</a></li>
+                        <li><a href="#favorite-products">Favorite Products</a></li>
+                        <li><a href="#christmas-gifts">Christmas Gifts</a></li>
+                        <li><a href="#tet-gifts">Tet Gifts</a></li>
+                    </ul>
+                </li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="khach-hang-than-thiet.html">Loyal Customers</a></li>
+                <li><a href="general-policy.html">General Policy</a></li>
+                <li><a href="work-shop.html">Workshop</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="middle-section">
+        <img src="Intro 1.jpg" 
+            alt="Ảnh trang trí bên trái" 
+            class="side-image left"
+        >        
+        <div class="center-content">
+            <h2>Introduction!</h2>
+            <p>Matie Cake was born from the passion and desire to create high-quality handmade cakes, both preserving traditional flavors and bringing a modern breath. Exporting small batches of cakes from family kitchens, the brand gradually shaped its own identity: meticulousness in ingredients, sophistication in flavor and creative taste in presentation.</p>
+            <p>Through the process of research, testing and perfection, Matie Cake officially launched the market with the mission of bringing customers cakes that are not only delicious but also contain mythical spiritual values. The motto "Giving delicate gifts, sending love" has become a guiding principle in all activities, from production, product design to customer experience.</p>
+            
+            <p>From the first challenging steps, Matie Cake has continuously developed, affirming its reputation in the handmade cake market. Nowadays, brands are not only the number 1 choice of customers when looking for a quality product but are still considered a symbol of sophistication in giving and sharing.</p>
+        </div>
+
+        <img src="Intro 2.jpg" 
+            alt="Ảnh trang trí bên phải" 
+            class="side-image right">    
+        </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <img src="Image/Logo.png" alt="Matie Cake" class="footer-logo">
+                <div>Matie Cake Co., Ltd.</div>
+                <div>Address: 3636 Hai Ba Trung, Vo Thi Sau Ward, 3 district, Ho Chi Minh City</div>
+                <div>Phone: 0886804360</div>
+                <div>Email: matiecake@gmail.com</div>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return & Refund Policy</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Personal Data Protection</a></li>
+                    <li><a href="#">Contact Information</a></li>
+                    <li><a href="#">Store</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Matie Cake.
+        </div>
+    </footer>
+    
+</body>
+</html>
